@@ -12,7 +12,7 @@ userService.readUser = (id) => {
 }
 
 userService.updateUser = (id,username,email,password,token) => {
-    return db.none('UPDATE user SET username = ${username}, email = ${email}, password = ${password}, token =${token} WHERE id = ${id}', 
+    return db.none('UPDATE users SET username = ${username}, email = ${email}, password = ${password}, token =${token} WHERE id = ${id}', 
        {id,username,email,password,token})
 }
 
