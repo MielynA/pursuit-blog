@@ -8,12 +8,26 @@ app.post('/', (req,res)=>{
         res.json({users})
    })
    .catch(err=>{
-        res.json({error: err.toString()})
+        res.status(404).json({error: err.toString()})
    })
 });
+app.get('/:user_id', (req,res)=>{
+    const {user_id} =req.params;
+    if(!user_id){
+        res.json({message: `user ${user_id} does not exist`})
+    }
+    userService.readUser(user_id).then((userId)=>{
+        res.json({userId})
+    })
+    .catch(err=>{
+        res.json({error: err.toString()})
+    })
 
+});
 
+app.put('/:user_id',(req,res)=>{
 
+});
 
 module.exports = {
     userService: app,
