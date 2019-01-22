@@ -20,4 +20,7 @@ userService.deleteUser = (id) => {
    return db.none('DELETE FROM users WHERE id = ${id}', {id})
 }
 
+userService.allUsers = () => {
+   return db.any('SELECT * FROM users')
+}
 module.exports = userService;
