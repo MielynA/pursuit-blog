@@ -1,14 +1,21 @@
 const app = require('express').Router();
 const userService = require('../services/user');
+const bcrypt = require('bcrypt');
+const uuidv1 = require('uuid/v1');
+//--- LOGIN USER 
 
-//--- CREATE USER
+//--- CREATE USER W AUTH
 app.post('/', (req,res)=>{
    const {username, email, password, token} = req.body; 
-   userService.createUser(username, email, password, token).then((users)=>{
+
+   bcrypt.hash(password,10).then((encryptedPass)=>{
+   
+    return userService.createUser(username, email, encryptedPass, token).then((users)=>{
         res.json({users})
-   })
+      })
    .catch(err=>{
-        res.status(404).json({error: err.toString()})
+        res.status(404).json({error: err.toString('utf-8')})
+      })
    })
 });
 //--- READ USER

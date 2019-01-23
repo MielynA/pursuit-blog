@@ -1,6 +1,4 @@
-const pgp = require('pg-promise')({});
-const db = pgp('postgres://localhost/blog')
-
+const db = require('../db/database')
 userService = {}
 
 userService.createUser = (username,email,password,token) => {
