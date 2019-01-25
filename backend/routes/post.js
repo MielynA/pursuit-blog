@@ -51,6 +51,17 @@ app.put('/:post_id',(req,res)=>{
          res.status(404).json({error: err.toString()})
      })
  })
+
+ //--- GET ALL POSTS FROM ALL AUTHORS (admin)
+ app.get('/', (req,res)=>{
+     postService.allPosts().then((allPosts)=>{
+         res.json({message: 'here are all the posts from all the authors', allPosts})
+     })
+     .catch(err=>{
+         res.status(404).json({error: err.toString()})
+     })
+ })
+
 module.exports = {
     postService: app,
 }
