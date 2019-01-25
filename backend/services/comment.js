@@ -8,8 +8,9 @@ commentService.createComments = (author,post_id,title,body) => {
 }
 
 
-
-
+commentService.readComments = (id) => {
+   return db.none('SELECT * FROM comments WHERE id =${id}', {id})
+}
 
 
 
