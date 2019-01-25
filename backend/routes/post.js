@@ -38,6 +38,26 @@ app.put('/:post_id',(req,res)=>{
         })
     })
  });
+ //--- GET COMMENTS FROM POST_ID (public)
+app.get('/:post_id/comments', (req,res)=>{
+    const {post_id} = req.params;
+    postService.commentsPost(post_id).then((commentPost)=>{
+        res.json({commentPost})
+    }) 
+    .catch(err=>{
+        res.status(404).json({error: err.toString()})
+    })
+});   
+//--- GET COMMENTS FROM A SPECIFIC POST_ID
+app.get('/:post_id/comments/:comment_id', (req,res)=>{
+    const {post_id, comment_id} = req.params; 
+  postService.commentPost(post_id,comment_id).then((commentPost)=>{
+      res.json({commentPost})
+  })
+  .catch(err=>{
+      res.status(404).json({error: err.toString()})
+  })
+})
  //--- DELETE POST (private)
  app.delete('/:post_id', (req,res)=>{
      const {post_id} = req.params;

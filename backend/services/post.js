@@ -19,7 +19,16 @@ postService.postDelete = (id) => {
    return db.none('DELETE FROM posts WHERE id = ${id}', {id})
 
 }
+postService.commentsPost = (post_id) =>{
+    return db.any('SELECT posts.author, posts.title, posts.body, comments.title, comments.body FROM posts JOIN comments ON posts.id = comments.post_id WHERE comments.post_id = ${post_id}',
+    {post_id})
+}
 
+postService.commentPost = (post_id, comment_id) =>{
+   return db.any('SELECT posts.author, posts.title, posts.body, comments.title, comments.body FROM posts JOIN comments ON posts.id = comments.post_id WHERE comments.post_id = ${post_id} AND comments.id = ${comment_id}', 
+    {post_id, comment_id})
+
+}
 postService.allPosts = () => {
     return db.any('SELECT * FROM posts')
  }
