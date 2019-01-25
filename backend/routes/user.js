@@ -108,7 +108,25 @@ app.get('/:user_id/posts/:post_id', (req,res)=>{
   })
 })
 //--- GET USER_ID COMMENTS (public)
-
+app.get('/:user_id/comments', (req,res)=>{
+    const {user_id} = req.params; 
+    userService.readUserComments(user_id).then((userComment)=>{
+        res.json({userComment})
+    }) 
+    .catch(err=>{
+        res.status(404).json({error: err.toString()})
+    })
+});   
+//--- GET COMMENT FROM A SPECIFIC USER_ID
+app.get('/:user_id/comments/:comment_id', (req,res)=>{
+    const {user_id, comment_id} = req.params; 
+  userService.readUserComment(user_id,comment_id).then((userComment)=>{
+      res.json({userComment})
+  })
+  .catch(err=>{
+      res.status(404).json({error: err.toString()})
+  })
+})
 module.exports = {
     userService: app,
 }
