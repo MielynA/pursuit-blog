@@ -2,25 +2,26 @@ const db = require('../db/database');
 postService = {}
 
 
-postService.postCreate = (id,author,title,body) =>{
-   return db.one('INSERT INTO posts (id,author,title,body) VALUES id =${id}, author = ${author}, title = ${title}, body = ${body}',
-       {id,author,title,body})
+postService.postCreate = (author,title,body) =>{
+   return db.one('INSERT INTO posts (author,title,body) VALUES(${author},${title},${body}) RETURNING id',
+       {author,title,body})
 } 
 
 postService.postRead = (id) =>{
-    return db.none('SELECT * FROM posts WHERE id = ${id}', {id})
+    return db.one('SELECT * FROM posts WHERE id = ${id}', {id})
 }
 
 postService.postUpdate = (id,author,title,body) => {
    return db.none('UPDATE posts SET author = ${author}, title = ${title}, body = ${body} WHERE id = ${id}', {id,author,title,body})
 }
 
-postService.postDelete = () => {
-   return db.none('DELETE FROM posts WHERE = ${id}', {id})
+postService.postDelete = (id) => {
+   return db.none('DELETE FROM posts WHERE id = ${id}', {id})
 
 }
-userService.allPosts = () => {
-    return db.any('SELECT * FROM users')
+
+postService.allPosts = () => {
+    return db.any('SELECT * FROM posts')
  }
 
 

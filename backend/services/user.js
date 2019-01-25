@@ -34,4 +34,9 @@ userService.readUserPost = (user_id, post_id) => {
     return db.any('SELECT users.username, posts.title, posts.body FROM users JOIN posts ON ${user_id} = posts.author WHERE posts.id = ${post_id} AND users.id = ${user_id}',
        {user_id, post_id})
 }
+
+userService.readUserComments = (id) =>{
+    return db.any('SELECT users.username, comments.title, comments.body FROM users JOIN comments ON ${id} = comments.author WHERE users.id = ${id}', {id})
+
+}
 module.exports = userService;
