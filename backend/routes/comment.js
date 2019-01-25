@@ -37,6 +37,18 @@ app.put('/:comment_id',(req,res)=>{
         })
     })
  });
-
+//--- DELETE COMMENTS (private)
+app.delete('/:comment_id', (req,res)=>{
+    const {comment_id} = req.params; 
+    const {author,post_id,title,body} = req.body;
+    commentService.readComments(comment_id).then((comments)=>{
+        commentService.deleteComments(comment_id,author,post_id,title,body).then(()=>{
+            res.json({message: 'successfully Deleted'})
+        })
+    })
+    .catch(err=>{
+        res.status(404).json({error: err.toString()})
+    })
+});
 
 module.exports = {commentService: app,} 
