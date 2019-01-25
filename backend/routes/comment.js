@@ -11,7 +11,7 @@ app.post('/', (req,res)=>{
         res.status(404).json({erro: err.toString()})
     })
 });
-//--- READ COMMENTS 
+//--- READ COMMENTS (public)
 app.get('/:comment_id', (req,res)=>{
     const {comment_id} = req.params; 
     if(!comment_id){
@@ -24,7 +24,19 @@ app.get('/:comment_id', (req,res)=>{
         res.json({error: err.toString()})
     })
 });
-
+//--- UPDATE/EDIT COMMENTS (private)
+app.put('/:comment_id',(req,res)=>{
+    const {comment_id} = req.params; 
+    const {author,post_id,title,body} = req.body; 
+    commentService.readComments(comment_id).then((data)=>{
+        commentService.updateComments(comment_id,author,post_id,title,body).then(()=>{
+            res.json({message: 'udpated!', data})
+        })
+        .catch(err=>{
+            res.status(404).json({error: err.toString()})
+        })
+    })
+ });
 
 
 module.exports = {commentService: app,} 

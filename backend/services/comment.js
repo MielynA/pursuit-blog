@@ -9,10 +9,13 @@ commentService.createComments = (author,post_id,title,body) => {
 
 
 commentService.readComments = (id) => {
-   return db.none('SELECT * FROM comments WHERE id =${id}', {id})
+   return db.one('SELECT * FROM comments WHERE id =${id}', {id})
 }
 
-
+commentService.updateComments = (id,author,post_id,title,body) => {
+    return db.none('UPDATE comments SET author = ${author}, post_id = ${post_id}, title = ${title}, body = ${body} WHERE id = ${id}', 
+        {id,author,post_id,title,body})
+}
 
 
 
