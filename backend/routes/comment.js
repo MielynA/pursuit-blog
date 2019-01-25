@@ -8,7 +8,7 @@ app.post('/', (req,res)=>{
         res.json({commentadd: comment})
     })
     .catch(err=>{
-        res.status(404).json({erro: err.toString()})
+        res.status(404).json({error: err.toString()})
     })
 });
 //--- READ COMMENTS (public)
@@ -50,5 +50,14 @@ app.delete('/:comment_id', (req,res)=>{
         res.status(404).json({error: err.toString()})
     })
 });
+//--- GET ALL COMMENTS FROM ALL USERS (ADMIN)
+app.get('/', (req,res)=> {
+    commentService.allComments().then((comment)=>{
+        res.json({message: 'Here are the list of all Users:', comment})
+    })
+    .catch(err=>{
+        res.status(404).json({error: err.toString()})
+    })
+ });
 
 module.exports = {commentService: app,} 

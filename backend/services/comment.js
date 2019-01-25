@@ -19,7 +19,9 @@ commentService.updateComments = (id,author,post_id,title,body) => {
 commentService.deleteComments = (id) =>{
     return db.none('DELETE FROM comments WHERE id = ${id}', {id})
 }
-
+commentService.allComments = () => {
+    return db.any('SELECT * FROM comments')
+}
 
 
 module.exports = commentService;
