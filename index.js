@@ -32,4 +32,4 @@ app.use('/comments', privateCommentService);
 
 //--- RUNNING ENVI SERVER PORT
 app.listen(process.env.PORT || 3006)
-console.log('Port 3006 is listenning..')
+console.log('Port 3006 is listening..')

@@ -2,7 +2,8 @@ const app = require('express').Router();
 const postService = require('../../services/post_services')
 const {checkForToken} = require('../../services/user_services')
 
-//--- MIDDLEWARE FOR CHECKING USER TOKEN
+//--- MIDDLEWARE 
+//--- FOR CHECKING USER TOKEN
 app.use(checkForToken);
 
 

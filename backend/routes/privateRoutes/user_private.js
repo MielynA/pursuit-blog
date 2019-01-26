@@ -24,17 +24,13 @@ app.delete('/:user_id', (req,res)=>{
   const {user_id} =req.params; 
   const{username, email, password, token} = req.body;
   userService.readUser(user_id).then((data)=>{
-      if(data.token){
-          next()
-      }
           userService.deleteUser(user_id, username, password, email, token).then(()=>{
-            res.json({message: 'deleted!', data })
-      
-  })
-  })
-  .catch(err=>{
+            res.json({message: 'deleted!', data }) 
+        })
+    })
+     .catch(err=>{
       res.status(404).json({error: err.toString()})
-  })
+   })
 });
 //--- GET ALL USERS (admin)
 app.get('/', (req,res)=> {
