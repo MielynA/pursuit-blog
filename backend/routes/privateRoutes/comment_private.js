@@ -1,6 +1,11 @@
 const app = require('express').Router();
 const commentService = require('../../services/comment_services');
 
+const {checkForToken} = require('../../services/user_services')
+
+//--- MIDDLEWARE FOR CHECKING USER TOKEN
+app.use(checkForToken);
+
 
 //--- UPDATE/EDIT COMMENTS (private)
 app.put('/:comment_id',(req,res)=>{
@@ -38,4 +43,4 @@ app.get('/', (req,res)=> {
     })
  });
 
-module.exports = {commentService: app,} 
+module.exports = {privateCommentService: app,} 
