@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 //--- PATH ROUTER MODULES
 const {userService} = require('./backend/routes/publicRoutes/user_public');
 const{privateUserService} = require('./backend/routes/privateRoutes/user_private')
-const {postService} = require('./backend/routes/privateRoutes/post');
+const {postService} = require('./backend/routes/publicRoutes/post_public');
+const{privatePostService} = require('./backend/routes/privateRoutes/post')
 const {commentService} = require('./backend/routes/publicRoutes/comment_public')
 //const {commentService} = require('./backend/routes/comment');
 
@@ -23,6 +24,7 @@ app.use('/users', privateUserService)
 app.use('/comments', commentService)
 //app.use('/comments', commentService);
 app.use('/posts', postService);
+app.use('/posts', privatePostService)
 
 
 

@@ -1,5 +1,10 @@
 const app = require('express').Router();
 const postService = require('../../services/post_services')
+const {checkForToken} = require('../../services/user_services')
+
+//--- MIDDLEWARE FOR CHECKING USER TOKEN
+app.use(checkForToken);
+
 
 //--- CREATE POSTS (private)
 app.post('/', (req,res)=>{
@@ -52,5 +57,5 @@ app.put('/:post_id',(req,res)=>{
  })
 
 module.exports = {
-    postService: app,
+    privatePostService: app,
 }
