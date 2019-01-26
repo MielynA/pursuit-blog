@@ -1,11 +1,14 @@
 //--- NPM PACKAGES MODULES
 const express = require('express');
 const app = express();
-//--- PATH ROUTER MODULES
 const bodyParser = require('body-parser');
-const {userService} = require('./backend/routes/user');
-const {postService} = require('./backend/routes/post');
-const {commentService} = require('./backend/routes/comment');
+
+//--- PATH ROUTER MODULES
+const {userService} = require('./backend/routes/publicRoutes/user_public');
+const{privateUserService} = require('./backend/routes/privateRoutes/user_private')
+const {postService} = require('./backend/routes/privateRoutes/post');
+const {commentService} = require('./backend/routes/publicRoutes/comment_public')
+//const {commentService} = require('./backend/routes/comment');
 
 
 //--- MIDDLEWARE
@@ -13,11 +16,13 @@ const {commentService} = require('./backend/routes/comment');
 app.use(bodyParser.urlencoded({extended:false}));
 //parse application/json
 app.use(bodyParser.json());
-app.use('/users', userService);
-app.use('/usersAll', userService);
-app.use('/posts', postService);
-app.use('/comments', commentService);
 
+
+app.use('/users', userService);
+app.use('/users', privateUserService)
+app.use('/comments', commentService)
+//app.use('/comments', commentService);
+app.use('/posts', postService);
 
 
 

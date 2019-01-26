@@ -44,4 +44,13 @@ userService.readUserComment = (user_id, comment_id) =>{
      {user_id, comment_id})
  
  }
+ //CHECK IF HAS TOKEN 
+userService.checkForToken = (req,res,next)=>{
+    //console.log(req.headers)
+    if(req.headers.token) next();
+    else{
+        res.status(401).res.json({error: 'No token found'})
+    }
+ 
+ }
 module.exports = userService;
