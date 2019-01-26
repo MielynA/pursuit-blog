@@ -25,4 +25,6 @@ app.get('/:comment_id', (req,res)=>{
     })
 });
 
-module.exports = {commentService: app,} 
+module.exports = {
+    commentService: app,
+} 

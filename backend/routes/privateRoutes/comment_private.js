@@ -42,4 +42,6 @@ app.get('/', (req,res)=> {
     })
  });
 
-module.exports = {privateCommentService: app,} 
+module.exports = {
+    privateCommentService: app,
+} 
